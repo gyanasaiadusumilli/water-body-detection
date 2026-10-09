@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+.DS_Store
+
+# Data and large artifacts
+data/
+outputs/*.pt
+*.zip
+models/
+predictions/
