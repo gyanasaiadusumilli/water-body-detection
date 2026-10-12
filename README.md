@@ -1,5 +1,7 @@
 # Water Body Detection from Sentinel-2 and Landsat-8 Imagery
 
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/gyanasaiadusumilli/water-body-detection/blob/main/notebooks/train_on_colab.ipynb)
+
 Pixel-level mapping of surface water from multispectral satellite imagery, comparing classical machine learning models against a CNN on two sensors: **Sentinel-2** (10 m) and **Landsat-8** (30 m).
 
 > Originally built during my undergraduate studies. Rebuilt and extended in 2026 after the original codebase was lost.
@@ -75,7 +77,10 @@ _Fill in from `results/comparison.md` after running the pipeline._
 ```
 water-body-detection/
 ├── gee/
-│   └── export_scenes.py    # Earth Engine export: imagery + JRC labels
+│   ├── export_scenes.py    # Earth Engine export to Google Drive: imagery + JRC labels
+│   └── fetch_scenes.py     # Direct download of 8 study areas (no Drive export)
+├── notebooks/
+│   └── train_on_colab.ipynb  # One-click download, train and compare
 ├── src/
 │   ├── features.py         # Bands and water indices
 │   ├── prepare_data.py     # Tiling and spatial train/val/test split
@@ -89,6 +94,10 @@ water-body-detection/
 ```
 
 ## How to run
+
+**Easiest: Google Colab.** Click the "Open in Colab" badge above and run the notebook top to bottom. It downloads Sentinel-2 and Landsat-8 scenes for 8 areas straight from Earth Engine, trains every model on a free GPU, and prints the comparison table.
+
+**Locally:**
 
 ```bash
 pip install -r requirements.txt
