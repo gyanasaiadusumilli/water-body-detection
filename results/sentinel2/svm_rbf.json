@@ -1,0 +1,14 @@
+{
+  "sensor": "sentinel2",
+  "model": "svm_rbf",
+  "accuracy": 0.98795,
+  "precision": 0.9908963608081056,
+  "recall": 0.9896321847990388,
+  "f1": 0.9902638693403185,
+  "iou_water": 0.9807154951396646,
+  "kappa": 0.97445733222196,
+  "n_pixels": 500000,
+  "train_pixels": 20000,
+  "train_seconds": 2.7,
+  "predict_seconds": 45.1
+}

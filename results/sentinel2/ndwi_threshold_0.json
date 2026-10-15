@@ -1,0 +1,11 @@
+{
+  "sensor": "sentinel2",
+  "model": "ndwi_threshold_0",
+  "accuracy": 0.969034,
+  "precision": 0.9922974180784719,
+  "recall": 0.9574241308476416,
+  "f1": 0.9745488975791617,
+  "iou_water": 0.9503611583999384,
+  "kappa": 0.9350491332071463,
+  "n_pixels": 500000
+}

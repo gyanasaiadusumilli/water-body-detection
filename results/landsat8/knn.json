@@ -1,0 +1,14 @@
+{
+  "sensor": "landsat8",
+  "model": "knn",
+  "accuracy": 0.987506,
+  "precision": 0.9921382427092825,
+  "recall": 0.9825070408856948,
+  "f1": 0.987299154022409,
+  "iou_water": 0.974916884827265,
+  "kappa": 0.9750059461154265,
+  "n_pixels": 500000,
+  "train_pixels": 50000,
+  "train_seconds": 0.1,
+  "predict_seconds": 11.3
+}

@@ -1,0 +1,14 @@
+{
+  "sensor": "landsat8",
+  "model": "logistic_regression",
+  "accuracy": 0.988392,
+  "precision": 0.9881543814224452,
+  "recall": 0.9883623061733191,
+  "f1": 0.9882583328612929,
+  "iou_water": 0.9767891992193749,
+  "kappa": 0.9767809911731,
+  "n_pixels": 500000,
+  "train_pixels": 300000,
+  "train_seconds": 1.2,
+  "predict_seconds": 0.1
+}

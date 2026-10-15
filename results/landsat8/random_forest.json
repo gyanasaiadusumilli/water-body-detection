@@ -1,0 +1,14 @@
+{
+  "sensor": "landsat8",
+  "model": "random_forest",
+  "accuracy": 0.988022,
+  "precision": 0.9927217297845126,
+  "recall": 0.9829723867793209,
+  "f1": 0.9878230035235824,
+  "iou_water": 0.9759389977863396,
+  "kappa": 0.9760381653016855,
+  "n_pixels": 500000,
+  "train_pixels": 300000,
+  "train_seconds": 161.4,
+  "predict_seconds": 3.8
+}

@@ -30,14 +30,35 @@ def main():
     (RESULTS / "comparison.md").write_text(table.to_markdown(index=False))
     print(table.to_string(index=False))
 
-    pivot = df.pivot_table(index="model", columns="sensor", values="iou_water").reindex(
-        [m for m in ORDER if m in set(df["model"])])
-    ax = pivot.plot.barh(figsize=(8, 5))
-    ax.set_xlabel("Water IoU (test set)")
-    ax.set_title("Water body detection: model comparison")
-    ax.set_xlim(0, 1)
-    plt.tight_layout()
-    plt.savefig(RESULTS / "comparison_iou.png", dpi=150)
+    names = {"ndwi_threshold_0": "NDWI > 0", "mndwi_otsu": "MNDWI (Otsu)", "logistic_regression": "Logistic regression",
+             "knn": "KNN", "svm_rbf": "SVM (RBF)", "random_forest": "Random forest",
+             "gradient_boosting": "Gradient boosting", "cnn_unet": "U-Net CNN"}
+    sensors = [s for s in ["sentinel2", "landsat8"] if s in set(df["sensor"])]
+    titles = {"sentinel2": "Sentinel-2 (10 m)", "landsat8": "Landsat-8 (30 m)"}
+    lo = max(0.0, df["iou_water"].min() - 0.01)
+    fig, axes = plt.subplots(1, len(sensors), figsize=(5.2 * len(sensors), 4.6), sharey=True, squeeze=False)
+    for ax, sensor in zip(axes[0], sensors):
+        d = df[df["sensor"] == sensor].sort_values("order")
+        best = d["iou_water"].max()
+        colors = ["#0B7C8A" if v == best else ("#B9C6C9" if m in ("ndwi_threshold_0", "mndwi_otsu") else "#6F8A92")
+                  for m, v in zip(d["model"], d["iou_water"])]
+        y = range(len(d))
+        ax.barh(list(y), d["iou_water"] - lo, left=lo, color=colors, height=0.68)
+        for yi, v in zip(y, d["iou_water"]):
+            ax.text(v + 0.0006, yi, f"{v:.3f}", va="center", fontsize=9, fontweight="bold" if v == best else "normal")
+        ax.set_yticks(list(y))
+        ax.set_yticklabels([names.get(m, m) for m in d["model"]])
+        ax.invert_yaxis()
+        ax.set_xlim(lo, 1.0)
+        ax.set_title(titles.get(sensor, sensor), fontsize=11)
+        ax.set_xlabel("Water IoU on the test set (higher is better)")
+        ax.grid(axis="x", alpha=0.3)
+        ax.spines[["top", "right"]].set_visible(False)
+    fig.suptitle("Water body detection: model comparison", fontsize=13)
+    fig.text(0.5, 0.005, "Light grey: index baselines. Teal: best model per sensor. Note the zoomed x-axis.",
+             ha="center", fontsize=8.5, color="#555")
+    plt.tight_layout(rect=(0, 0.03, 1, 1))
+    plt.savefig(RESULTS / "comparison_iou.png", dpi=160)
     print(f"Saved {RESULTS / 'comparison.csv'}, comparison.md and comparison_iou.png")
 
 

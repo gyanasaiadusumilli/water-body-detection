@@ -1,0 +1,14 @@
+{
+  "sensor": "sentinel2",
+  "model": "knn",
+  "accuracy": 0.97336,
+  "precision": 0.9903191214726851,
+  "recall": 0.9664257199333359,
+  "f1": 0.9782265420414088,
+  "iou_water": 0.9573810460841436,
+  "kappa": 0.9439315699354506,
+  "n_pixels": 500000,
+  "train_pixels": 50000,
+  "train_seconds": 0.1,
+  "predict_seconds": 9.4
+}

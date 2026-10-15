@@ -57,20 +57,35 @@ The CNN is an encoder-decoder with skip connections, trained with BCE + Dice los
 
 ## Results
 
-_Fill in from `results/comparison.md` after running the pipeline._
+Eight study areas, two sensors, one fixed sample of 500,000 test pixels per sensor (same pixels for every model). Main metric: **IoU for the water class**.
+
+![Model comparison](results/comparison_iou.png)
 
 | Model | Sentinel-2 IoU | Sentinel-2 Acc | Landsat-8 IoU | Landsat-8 Acc |
 |---|---|---|---|---|
-| NDWI > 0 | | | | |
-| MNDWI (Otsu) | | | | |
-| Logistic Regression | | | | |
-| KNN | | | | |
-| SVM (RBF) | | | | |
-| Random Forest | | | | |
-| Gradient Boosting | | | | |
-| **CNN (U-Net)** | | | | |
+| NDWI > 0 | 0.950 | 96.9% | 0.921 | 96.1% |
+| MNDWI (Otsu) | 0.979 | 98.7% | 0.957 | 97.8% |
+| Logistic Regression | 0.980 | 98.7% | 0.977 | 98.8% |
+| KNN | 0.957 | 97.3% | 0.975 | 98.8% |
+| SVM (RBF) | 0.981 | 98.8% | 0.978 | 98.9% |
+| Random Forest | 0.967 | 98.0% | 0.976 | 98.8% |
+| Gradient Boosting | 0.975 | 98.4% | **0.978** | **98.9%** |
+| **U-Net CNN** | **0.984** | **99.0%** | 0.973 | 98.6% |
 
-<!-- After running: ![Model comparison](results/comparison_iou.png) and a predictions/*_preview.png -->
+Full metrics (precision, recall, F1, kappa) are in [`results/comparison.md`](results/comparison.md).
+
+### What the results show
+
+- **On Sentinel-2 (10 m), the U-Net CNN is the best model**: water IoU 0.984 and 99.0% accuracy. Compared with the classic NDWI > 0 threshold, it cuts the mislabelled water area (1 − IoU) from 5.0% to 1.6%, about two-thirds fewer errors.
+- **On Landsat-8 (30 m), the classical models edge out the CNN.** Gradient boosting reaches 0.978 against 0.973 for the U-Net. At 30 m, a 128 × 128 tile covers almost 4 km, so shorelines and small water bodies span few pixels and spatial context helps less. The JRC labels are also derived from Landsat imagery by a per-pixel classifier, so per-pixel models trained on Landsat bands can match them very closely.
+- **Learned models beat fixed index thresholds on both sensors.** Even choosing the MNDWI threshold from the data (Otsu: 0.19 for Sentinel-2, 0.17 for Landsat-8, instead of 0) closes most of the gap.
+- The CNN used early stopping on validation IoU: it trained for 14 epochs on Sentinel-2 and 30 on Landsat-8.
+
+![Detected water over Hyderabad](results/maps/hyderabad_202102_cnn_unet_preview.png)
+
+*U-Net water mask over Hyderabad (Sentinel-2, February 2021), including Hussain Sagar lake.*
+
+These are single runs with one random seed. Differences of about 0.005 IoU between the top models are within what a different split or seed could change.
 
 ## Project structure
 

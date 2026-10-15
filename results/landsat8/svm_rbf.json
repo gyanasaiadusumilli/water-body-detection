@@ -1,0 +1,14 @@
+{
+  "sensor": "landsat8",
+  "model": "svm_rbf",
+  "accuracy": 0.988888,
+  "precision": 0.992084185481834,
+  "recall": 0.9853800459680813,
+  "f1": 0.9887207513002806,
+  "iou_water": 0.9776931075877963,
+  "kappa": 0.9777713605721061,
+  "n_pixels": 500000,
+  "train_pixels": 20000,
+  "train_seconds": 0.6,
+  "predict_seconds": 14.7
+}

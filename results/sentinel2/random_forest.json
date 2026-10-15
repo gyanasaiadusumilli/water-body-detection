@@ -1,0 +1,14 @@
+{
+  "sensor": "sentinel2",
+  "model": "random_forest",
+  "accuracy": 0.979534,
+  "precision": 0.9906742409094336,
+  "recall": 0.9761378757929279,
+  "f1": 0.9833523404822989,
+  "iou_water": 0.9672498935853573,
+  "kappa": 0.9567988887786006,
+  "n_pixels": 500000,
+  "train_pixels": 300000,
+  "train_seconds": 153.4,
+  "predict_seconds": 4.0
+}

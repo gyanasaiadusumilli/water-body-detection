@@ -1,0 +1,14 @@
+{
+  "sensor": "sentinel2",
+  "model": "gradient_boosting",
+  "accuracy": 0.984322,
+  "precision": 0.9895336199205126,
+  "recall": 0.9851007066909552,
+  "f1": 0.9873121875187145,
+  "iou_water": 0.974942302405718,
+  "kappa": 0.9668002681925073,
+  "n_pixels": 500000,
+  "train_pixels": 300000,
+  "train_seconds": 3.5,
+  "predict_seconds": 2.9
+}
